@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import './locale';
-import logo from './logo.svg'
-import './App.css'
+import logo from './logo.svg';
+import './App.css';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -39,7 +39,7 @@ function App() {
         </p>
       </header>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

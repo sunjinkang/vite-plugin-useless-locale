@@ -1,18 +1,27 @@
 import type { PluginOption } from 'vite';
+import { VitePluginUselessLocaleType } from './index.d';
+import { transformKeys } from './transformKeys';
 
-export default function vitePluginUselessLocale(): PluginOption {
+export default function vitePluginUselessLocale(
+  params: VitePluginUselessLocaleType,
+): PluginOption {
   return {
-    // 插件名称
     name: 'vite-plugin-useless-locale',
 
-    // pre 会较于 post 先执行
-    enforce: 'post', // post
+    enforce: 'pre', // post | pre
 
-    // 指明它们仅在 'build' 或 'serve' 模式时调用
-    apply: 'build', // apply 亦可以是一个函数
+    apply: 'serve', // build | serve
 
     transform(code, id, options) {
-        console.log(code);
+      const useReactI18 = /react-i18next.*/g;
+      const useI18n = /i18next.*/g;
+      if (
+        !useReactI18.test(code) ||
+        !useI18n.test(code) ||
+        !/i18n.*/g.test(code)
+      )
+        return code;
+      transformKeys(params?.localePath, params?.fileSuffix);
     },
   };
 }

@@ -1,5 +1,8 @@
 import { PluginOption } from 'vite';
 
-declare function vitePluginUselessLocale(): PluginOption;
+type VitePluginUselessLocaleType = {
+    localePath: string;
+};
+declare function vitePluginUselessLocale(params: VitePluginUselessLocaleType): PluginOption;
 
 export { vitePluginUselessLocale as default };

@@ -29,6 +29,7 @@
     "vite": "*"
   },
   "dependencies": {
+    "node-xlsx": "^0.23.0",
     "pnpm": "^8.6.10"
   }
 }

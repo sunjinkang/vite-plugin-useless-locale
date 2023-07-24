@@ -23,7 +23,7 @@ __export(src_exports, {
   default: () => vitePluginUselessLocale
 });
 module.exports = __toCommonJS(src_exports);
-function vitePluginUselessLocale() {
+function vitePluginUselessLocale(params) {
   return {
     // 插件名称
     name: "vite-plugin-useless-locale",
@@ -31,10 +31,13 @@ function vitePluginUselessLocale() {
     enforce: "post",
     // post
     // 指明它们仅在 'build' 或 'serve' 模式时调用
-    apply: "build",
+    apply: "serve",
     // apply 亦可以是一个函数
     transform(code, id, options) {
-      console.log(code);
+      const useReactI18 = /react-i18next.*/g;
+      const useI18n = /i18next.*/g;
+      if (!useReactI18.test(code) || !useI18n.test(code) || !/i18n.*/g.test(code))
+        return code;
     }
   };
 }

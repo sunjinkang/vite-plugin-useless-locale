@@ -4,5 +4,5 @@ import uselessLocale from 'vite-plugin-useless-locale';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), uselessLocale()],
+  plugins: [react(), uselessLocale({ localePath: './src/locale' })],
 });
