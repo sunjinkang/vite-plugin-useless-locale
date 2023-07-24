@@ -1,0 +1,34 @@
+{
+  "name": "vite-plugin-useless-locale",
+  "version": "1.0.0",
+  "description": "show useless locale key",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "pnpm run build --watch --ignore-watch examples",
+    "build": "tsup src/index.ts --dts --format cjs,esm",
+    "example:react": "cd examples/vite-react && pnpm run build",
+    "example:umc": "cd examples/umc-ui && pnpm run build"
+  },
+  "keywords": [
+    "vite",
+    "plugin"
+  ],
+  "author": "sunjinkang",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^17.0.35",
+    "@typescript-eslint/eslint-plugin": "^5.26.0",
+    "@typescript-eslint/parser": "^5.26.0",
+    "bumpp": "^7.1.1",
+    "eslint": "^8.16.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.6.2",
+    "tsup": "^6.0.1",
+    "typescript": "^4.7.2",
+    "vite": "*"
+  },
+  "dependencies": {
+    "pnpm": "^8.6.10"
+  }
+}
