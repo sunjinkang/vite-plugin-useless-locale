@@ -1,16 +1,17 @@
 import type { PluginOption } from 'vite';
 import { VitePluginUselessLocaleType } from './index.d';
 import { transformKeys } from './transformKeys';
+import { transformCode } from './transformCode';
 
-export default function vitePluginUselessLocale(
+const vitePluginUselessLocale = (
   params: VitePluginUselessLocaleType,
-): PluginOption {
+): PluginOption => {
   return {
     name: 'vite-plugin-useless-locale',
 
     enforce: 'pre', // post | pre
 
-    apply: 'serve', // build | serve
+    apply: 'build', // build | serve
 
     transform(code, id, options) {
       const useReactI18 = /react-i18next.*/g;
@@ -21,7 +22,14 @@ export default function vitePluginUselessLocale(
         !/i18n.*/g.test(code)
       )
         return code;
-      transformKeys(params?.localePath, params?.fileSuffix);
+      const allLocaleKeys = transformKeys(
+        params?.localePath,
+        params?.fileSuffix,
+      );
+      transformCode(code, allLocaleKeys);
+      return code;
     },
   };
-}
+};
+
+export default vitePluginUselessLocale;

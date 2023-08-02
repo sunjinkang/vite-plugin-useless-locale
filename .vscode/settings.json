@@ -1,0 +1,5 @@
+{
+  "react-i18n-prompt.language-package-exclude-path": "src/locale/zh-cn/**/*.{ts,js,tsx,jsx}",
+  "react-i18n-prompt.language-package-path": "src/locale/zh-cn/**/*.{ts,js,tsx,jsx}",
+  "react-i18n-prompt.language-key-prefix": "${fileName}"
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div
+      style="width: 300px; height: 400px; background-color: aqua; color: red"
+      id="content"
+    ></div>
+  </body>
+  <script>
+    // 建立连接
+    const source = new EventSource('http://localhost:3000/article');
+    let str = '';
+    // 接收信息
+    source.onmessage = function (e) {
+      if (e.data === 'end') {
+        // 判断end，关闭连接
+        source.close();
+      }
+
+      str += `${e.data}\n\n`;
+      // 实时输出字符串
+      document.getElementById('content').innerHTML = str;
+      // console.log(str);
+    };
+  </script>
+</html>

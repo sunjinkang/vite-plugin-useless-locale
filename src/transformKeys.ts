@@ -1,9 +1,7 @@
-import { readFile, writeFile } from './ReadAndWriteLocaleData';
-
-const fs = require('fs');
-const path = require('path');
-const parser = require('@babel/parser');
-const traverse = require('@babel/traverse');
+import fs from 'fs';
+import path from 'path-browserify';
+import parser from '@babel/parser';
+import traverse from '@babel/traverse';
 
 let keysData: { [key: string]: string[] } = {};
 let currentFileKeys: string[] = [];
@@ -78,14 +76,10 @@ const getKeysByAst = (code, fileName) => {
 const getFileLocaleDataByFileName = (fileName, fileSuffix) => {
   const fileContent = fs.readFileSync(fileName).toString();
   keysData = {};
-  currentFileKeys = [];
   const code = parser.parse(fileContent, {
     sourceType: 'module',
   });
-
   getKeysByAst(code, !!fileSuffix ? `${fileName}${fileSuffix}` : fileName);
-  const localeData = readFile();
-  writeFile({ sheet: [...localeData, [...currentFileKeys]] });
 };
 
 const getDirAllFile = (dir) => {
@@ -108,11 +102,14 @@ const getFilePath = (dir, allFile) => {
   });
 };
 
-export const transformKeys = (directory: string, fileSuffix?: string) => {
-  const localeDir = path.resolve(__dirname, directory);
-
+export const transformKeys = (
+  directory: string,
+  fileSuffix?: string,
+): string[] => {
+  const localeDir = path.resolve(directory);
   const localeFilePath: string[] = getDirAllFile(localeDir);
   localeFilePath.forEach((item) =>
     getFileLocaleDataByFileName(item, fileSuffix),
   );
+  return currentFileKeys;
 };
