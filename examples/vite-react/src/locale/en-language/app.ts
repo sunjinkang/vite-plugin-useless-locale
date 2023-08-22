@@ -3,5 +3,8 @@ export default {
   number: 'count',
   learnReact: 'Learn React',
   learnVite: 'Learn Vite',
-  test: '测试'
-}
+  test: '测试',
+  index: {
+    testName: 'locale',
+  },
+};
